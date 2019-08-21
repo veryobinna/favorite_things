@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'favorite_things.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'favorite_thingsdb',
+        'NAME': '',
         'USER':'',
         'PASSWORD':'',
         'HOST':'',

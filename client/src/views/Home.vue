@@ -27,7 +27,6 @@
 <script>
 import FavoriteThings from "../components/FavoriteThings.vue";
 import Categories from "../components/Categories.vue";
-import Category from "../components/Category.vue";
 import Sidebar from "../components/layout/Sidebar.vue";
 import axios from "axios";
 
@@ -50,26 +49,20 @@ export default {
     addNewFavoriteThing(newItem) {
       axios
         .post(`${APIHost}/favorite_things/`, newItem)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err));
     },
     updateFavoriteThing(newItem) {
       axios
         .put(`${APIHost}/favorite_things/${newItem.id}/`, newItem)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err));
     },
     addNewCategory(newItem) {
       axios
         .post(`${APIHost}/category/`, newItem)
         .then(res => (this.categories = [...this.categories, res.data]))
-        .catch(err => console.log(err));
     },
     switchCategory(url) {
       axios
         .get(url)
         .then(res => (this.favoriteThingsObj = res.data))
-        .catch(err => console.log(err));
     }
   },
   created() {
@@ -81,10 +74,8 @@ export default {
           axios
             .get(this.categories[0].url)
             .then(res => (this.favoriteThingsObj = res.data))
-            .catch(err => console.log(err));
         }
       })
-      .catch(err => console.log(err));
   }
 };
 </script>
