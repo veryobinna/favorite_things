@@ -30,7 +30,7 @@ import Categories from "../components/Categories.vue";
 import Sidebar from "../components/layout/Sidebar.vue";
 import axios from "axios";
 
-const APIHost = process.env.VUE_APP_API_HOST;
+const APIHost = `${process.env.VUE_APP_API_HOST}/api`;
 
 export default {
   name: "Home",

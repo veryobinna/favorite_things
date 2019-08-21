@@ -32,7 +32,7 @@ class TestViews(TestCase):
         )
 
     def test_returns_categories(self):
-        response = self.client.get("/category/")
+        response = self.client.get("/api/category/")
         resp = json.loads(response.content)
         category = resp["results"][0]
 
@@ -40,7 +40,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_returns_categories(self):
-        response = self.client.get("/favorite_things/")
+        response = self.client.get("/api/favorite_things/")
         resp = json.loads(response.content)
         favorite_thing = resp["results"][0]
 
@@ -49,28 +49,28 @@ class TestViews(TestCase):
 
     def test_add_category(self):
         category = {"name": "sports"}
-        response = self.client.post("/category/", category)
+        response = self.client.post("/api/category/", category)
         resp = json.loads(response.content)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(category["name"], resp["name"])
 
     def test_add_favorite_thing(self):
         favorite_thing = {"title": "Paris", "ranking": 2, "category": self.category.id}
-        response = self.client.post("/favorite_things/", favorite_thing)
+        response = self.client.post("/api/favorite_things/", favorite_thing)
         resp = json.loads(response.content)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(favorite_thing["title"], resp["title"])
 
     def test_add_favorite_thing(self):
         favorite_thing = {"title": "Paris", "ranking": 2, "category": self.category.id}
-        response = self.client.post("/favorite_things/", favorite_thing)
+        response = self.client.post("/api/favorite_things/", favorite_thing)
         resp = json.loads(response.content)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(favorite_thing["title"], resp["title"])
 
     def test_add_favorite_thing_returns_error_for_invalid_data(self):
         favorite_thing = {"title": "Paris", "ranking": 0, "category": self.category.id}
-        response = self.client.post("/favorite_things/", favorite_thing)
+        response = self.client.post("/api/favorite_things/", favorite_thing)
         resp = json.loads(response.content)
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
@@ -80,7 +80,7 @@ class TestViews(TestCase):
     def test_update_favorite_thing(self):
         data = {"title": "Lagos", "ranking": 1, "category": self.category.id}
         response = self.client.put(
-            f"/favorite_things/{self.favorite_thing.id}/",
+            f"/api/favorite_things/{self.favorite_thing.id}/",
             data,
             content_type="application/json",
         )
@@ -90,7 +90,7 @@ class TestViews(TestCase):
 
     def test_favorite_thing_reorder_on_new_addition(self):
         data = {"title": "London", "ranking": 1, "category": self.category.id}
-        response = self.client.post(f"/favorite_things/", data)
+        response = self.client.post(f"/api/favorite_things/", data)
         resp = json.loads(response.content)
 
         prev_top_rank_query = FavoriteThing.objects.filter(title="Austria")
@@ -101,5 +101,5 @@ class TestViews(TestCase):
         self.assertEqual(prev_top_rank_query[0].ranking, 2)
 
     def test_delete_favorite_thing(self):
-        response = self.client.delete(f"/favorite_things/{self.favorite_thing.id}/")
+        response = self.client.delete(f"/api/favorite_things/{self.favorite_thing.id}/")
         self.assertEqual(response.status_code, 204)
