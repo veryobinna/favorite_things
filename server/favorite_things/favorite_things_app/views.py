@@ -6,6 +6,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import FavoriteThing, Category
 from .serializers import CategorySerializer, FavoriteThingSerializer
+import logging
+
+
+logger = logging.getLogger()
 
 
 class CategoryView(viewsets.ModelViewSet):
@@ -29,6 +33,7 @@ class CategoryView(viewsets.ModelViewSet):
                 )
         data = dict(serializer.data)
         data.update({"favorite_things": favorite_things})
+
         return Response(data)
 
 
@@ -54,7 +59,9 @@ class FavoriteThingView(viewsets.ModelViewSet):
 
             FavoriteThing.reorder(category, new_ranking=ranking)
             serializer.save()
+            logger.info(f"Item created: {serializer.data}")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        logger.error(f"Bad request:{serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, pk=None):
@@ -76,7 +83,9 @@ class FavoriteThingView(viewsets.ModelViewSet):
                 )
             FavoriteThing.reorder(category, new_ranking, old_ranking)
             serializer.save()
+            logger.info(f"Item updated: {serializer.data}")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        logger.error(f"Error: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, pk=None):
@@ -85,5 +94,6 @@ class FavoriteThingView(viewsets.ModelViewSet):
         category = favorite_thing.category
         FavoriteThing.reorder(category, old_ranking=ranking)
         favorite_thing.delete()
+        logger.info(f"Item deleted: {favorite_thing}")
 
         return Response(status=status.HTTP_204_NO_CONTENT)

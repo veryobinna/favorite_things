@@ -5,7 +5,7 @@ from .models import FavoriteThing, Category
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ["name", "url"]
+        fields = ["name", "id", "url"]
 
 
 class FavoriteThingSerializer(serializers.ModelSerializer):

@@ -15,8 +15,10 @@
         role="tabpanel"
       >
         <b-card-body>
-          <b-card-text>Rank: {{favoriteThing.ranking}}</b-card-text>
+          <b-card-sub-title class="mb-2">Rank: {{favoriteThing.ranking}}</b-card-sub-title>
           <b-card-text>{{ favoriteThing.description }}</b-card-text>
+          <b-card-text>{{ favoriteThing.metadata }}</b-card-text>
+          <div slot="footer"><small class="text-muted">Created  on:  {{favoriteThing.created_at}} Updated on:  {{favoriteThing.updated_at}}</small></div>
           <b-button v-b-modal="'edit-modal-'+favoriteThing.id" variant="outline-secondary" block>Edit</b-button>
           <AddNewFavoriteThing
             modalTitle="Edit Favorite Item"
