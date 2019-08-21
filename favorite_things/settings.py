@@ -20,13 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['favoritethings.herokuapp.com', 'localhost', '127.0.0.1']
-
 
 # Application definition
 
@@ -75,21 +71,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'favorite_things.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'favorite_thingsdb',
-        'USER':'',
-        'PASSWORD':'',
-        'HOST':'',
-        'PORT':''
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -133,39 +114,22 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:8080",
-    "http://127.0.0.1:8000"
-]
-log_path = Path.cwd()/'favorite_things/logs/audit.log'
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'standard': {
-            'format': '{levelname} {asctime} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': str(log_path),
-        },
-    },
-    'loggers': {
-        #catch all logs
-        '': {
-            'handlers': ['file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
-}
 
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'dist/static'),
+  os.path.join(BASE_DIR, 'dist'),
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+APP_ENV = os.environ['APP_ENV']
+
+if APP_ENV == 'development':
+    try:
+        from .settings_local import *
+    except ImportError:
+        pass
+elif APP_ENV == 'production':
+    try:
+        from .settings_prod import *
+    except ImportError:
+        pass
