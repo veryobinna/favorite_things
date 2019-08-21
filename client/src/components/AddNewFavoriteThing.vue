@@ -1,11 +1,6 @@
 <template>
   <div>
-    <b-modal
-      v-bind:id="modalId"
-      ref="modal"
-      v-bind:title="modalTitle"
-      @ok="handleOk"
-    >
+    <b-modal v-bind:id="modalId" ref="modal" v-bind:title="modalTitle" @ok="handleOk">
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group
           :state="titleState"
@@ -30,7 +25,7 @@
         </b-form-group>
 
         <b-form-group
-        v-if="modalTitle == 'Add New Favorite Item'"
+          v-if="modalTitle == 'Add New Favorite Item'"
           :state="categoryState"
           label="Category"
           label-for="category-input"
@@ -118,11 +113,11 @@ export default {
         category: this.category,
         metadata: this.metadata
       };
-      if (this.modalTitle=="Add New Favorite Item"){
-          this.$emit("addNewFavoriteThing", newItem);
-      }else{
-          newItem["id"]= this.itemId
-          this.$emit("updateFavoriteThing", newItem);
+      if (this.modalTitle == "Add New Favorite Item") {
+        this.$emit("addNewFavoriteThing", newItem);
+      } else {
+        newItem["id"] = this.itemId;
+        this.$emit("updateFavoriteThing", newItem);
       }
       // Hide the modal manually
       this.$nextTick(() => {

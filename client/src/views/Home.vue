@@ -31,6 +31,8 @@ import Category from "../components/Category.vue";
 import Sidebar from "../components/layout/Sidebar.vue";
 import axios from "axios";
 
+const APIHost = process.env.VUE_APP_API_HOST;
+
 export default {
   name: "Home",
   components: {
@@ -47,19 +49,19 @@ export default {
   methods: {
     addNewFavoriteThing(newItem) {
       axios
-        .post("http://127.0.0.1:8000/favorite_things/", newItem)
+        .post(`${APIHost}/favorite_things/`, newItem)
         .then(res => console.log(res.data))
         .catch(err => console.log(err));
     },
-    updateFavoriteThing(newItem){
+    updateFavoriteThing(newItem) {
       axios
-        .put(`http://127.0.0.1:8000/favorite_things/${newItem.id}/`, newItem)
+        .put(`${APIHost}/favorite_things/${newItem.id}/`, newItem)
         .then(res => console.log(res.data))
         .catch(err => console.log(err));
     },
     addNewCategory(newItem) {
       axios
-        .post("http://127.0.0.1:8000/category/", newItem)
+        .post(`${APIHost}/category/`, newItem)
         .then(res => (this.categories = [...this.categories, res.data]))
         .catch(err => console.log(err));
     },
@@ -72,13 +74,15 @@ export default {
   },
   created() {
     axios
-      .get("http://127.0.0.1:8000/category/")
+      .get(`${APIHost}/category/`)
       .then(res => {
         this.categories = res.data.results;
-        axios
-          .get(this.categories[0].url)
-          .then(res => (this.favoriteThingsObj = res.data))
-          .catch(err => console.log(err));
+        if (this.categories.length > 0) {
+          axios
+            .get(this.categories[0].url)
+            .then(res => (this.favoriteThingsObj = res.data))
+            .catch(err => console.log(err));
+        }
       })
       .catch(err => console.log(err));
   }

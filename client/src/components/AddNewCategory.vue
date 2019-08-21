@@ -54,7 +54,7 @@ export default {
       if (!this.checkFormValidity()) {
         return;
       }
-      this.$emit('addNewCategory', {name: this.name})
+      this.$emit("addNewCategory", { name: this.name });
       // Hide the modal manually
       this.$nextTick(() => {
         this.$refs.modal.hide();

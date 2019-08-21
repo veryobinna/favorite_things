@@ -1,28 +1,27 @@
 <template>
-<div>
-
-  <header class="header">
+  <div>
+    <header class="header">
       <router-link to="/">Favorite Things</router-link>
-  </header>
-</div>
+    </header>
+  </div>
 </template>
 
 <script>
 export default {
-    name:'Header'
-}
+  name: "Header"
+};
 </script>
 
 
 <style scoped>
 .header {
-    background:#343a40;
-    color: gray;
-    text-align: center;
-    padding: 15px;
+  background: #343a40;
+  color: gray;
+  text-align: center;
+  padding: 15px;
 }
 .header a {
-    color: rgba(255, 255, 255, 0.5);;
-    text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
 }
 </style>
