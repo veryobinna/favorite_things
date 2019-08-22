@@ -114,5 +114,5 @@ local_settings.py
 db.sqlite3
 venv/*
 .vscode
-settings_prod.py
+# settings_prod.py
 settings_local.py
