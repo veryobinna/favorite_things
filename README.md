@@ -9,7 +9,7 @@ pip install -r requirements.txt
 ```
 
 #### Running the server
-- Edit `settings.py.example` file and in the DATABASES section, add your database config, and rename to `settings.py`
+- Edit `settings_local.py.example` file and in the DATABASES section, add your database config, and rename to `settings_local.py`
 - Edit `env.example` file and put in your credentials and rename to `.env`
 
 ```bash
@@ -51,7 +51,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 * **URL**
 
-  /favorite_things
+  /api/favorite_things
 
 * **Method:**
   
@@ -60,7 +60,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 * **URL**
 
-  /favorite_things
+  /api/favorite_things
 
 * **Method:**
   
@@ -78,7 +78,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 * **URL**
 
-  /favorite_things/int:favorite_thing_id
+  /api/favorite_things/int:favorite_thing_id
 
 * **Methods:**
   
@@ -88,7 +88,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 * **URL**
 
-  /categories
+  /api/categories
 
 * **Method:**
   
@@ -103,7 +103,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 * **URL**
 
-  /categories
+  /api/categories
 
 * **Method:**
   
@@ -111,7 +111,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 * **URL**
 
-  /categories/int:category_id
+  /api/categories/int:category_id
 
 * **Methods:**
   
