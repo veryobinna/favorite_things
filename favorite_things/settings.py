@@ -20,6 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
+DEBUG = False
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
@@ -51,6 +52,20 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'favorite_things.urls'
+
+
+ALLOWED_HOSTS = ['favoritethings.herokuapp.com']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DB_NAME'],
+        'USER':os.environ['DB_USER'],
+        'PASSWORD':os.environ['DB_PASSWORD'],
+        'HOST':os.environ['DB_HOST'],
+        'PORT':os.environ['DB_PORT']
+    }
+}
 
 TEMPLATES = [
     {
@@ -132,11 +147,6 @@ LOGGING = {
         },
     },
     'handlers': {
-        # 'file': {
-        #     'level': 'INFO',
-        #     'class': 'logging.FileHandler',
-        #     'filename': '/logs/audit.log',
-        # },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -158,10 +168,5 @@ APP_ENV = os.environ['APP_ENV']
 if APP_ENV == 'development':
     try:
         from .settings_local import *
-    except ImportError:
-        pass
-elif APP_ENV == 'production':
-    try:
-        from .settings_prod import *
     except ImportError:
         pass
