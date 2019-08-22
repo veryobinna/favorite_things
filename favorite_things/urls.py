@@ -27,6 +27,6 @@ router.register('category', views.CategoryView)
 
 urlpatterns = [
     path('api/', include(router.urls)),
-    path('admin/', admin.site.urls),
+    path('api/admin/', admin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
 ]
