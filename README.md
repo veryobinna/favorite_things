@@ -1,4 +1,20 @@
-### This is a simple CRUD API for notes management
+### About
+This is a simple app to keep track of your favorite things.
+
+#### Thought process
+I  started the app by first figuring out how many tables I needed and the relationship. I figured out two tables will be needed, one for categories, and the other for favorite things,  and the relationship, as can be seen in the [ERD](Favorite_things_erd.vpd.jpg). After that, I figured out the best way to reorder the ranking on each addition. Fetching all the data from the DB and reordering each rank was the obvious way, but that would be wasteful, so I used an update query instead. The logic is simple, on each new insert or delete, and add a value of 1 or subtract a value of 1 accordingly from each subsequent rows.
+
+#### Deployment process
+This app is deployed on Heroku and the steps are as follows:
+- Compile and minify the client
+- Update the settings of Django to point to the compiled code
+- Create a script to run the migration and run the server on Heroku (Procfile)
+- Create an online DB
+- Create the app on Heroku
+- Run a script that sets the production env variables (Database credentials, secret keys, env and base domain address)
+- Push the code to Heroku.
+
+
 #### To run the file, clone this repo
 - clone this repo 
 - Change directory into the app root directory
@@ -45,7 +61,10 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-
+### Lints and fixes files on server
+```
+black favorite_things
+```
 
 #### Server Endpoints
 

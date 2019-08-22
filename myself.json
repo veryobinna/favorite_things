@@ -1,0 +1,25 @@
+{
+    "Name": "Obinna Okwuolisa",
+    "Email":"kingobiorah@gmail.com",
+    "Country": "Nigeria",
+    "Education":[
+        {
+            "Degree": "B.Sc"
+        },
+        {
+            "Course": "Computer Science"
+        }
+        ],
+    "Language":"English",
+    "Ocupation":"Software Engineer",
+    "TechSkills": [
+        {
+            "Python": ["Django", "Flask"]
+        },
+        {
+            "Javascript": ["React", "Vue","Angular"]
+        }
+    ],
+    "OtherTechSkills": ["Git", "Docker", "Postgres", "MongoDB","Jupiter", "Machine Learning"],
+    "SoftSkills":["Writing","Reading","Agile","Proficient use of busines tools"]
+}
